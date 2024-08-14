@@ -1,6 +1,20 @@
 import java.util.Scanner;
 
-public class EjercicioPotencia {
+public class EjercicioFuncionPotencia {
+
+    static double calcularPotencia(double b, int e){
+        double p = 1;
+        if(e<0){
+            System.out.println("No es posible calcular la potencia...\n");
+            return -1;
+        }
+        else{
+            for(;e>0;e--)
+                p *= b;
+            return p;
+        }
+    }
+
     public static void main(String[] args) {
         Scanner lector = new Scanner(System.in);
 
@@ -14,7 +28,7 @@ public class EjercicioPotencia {
             System.out.println("Ingrese el Exponente: ");
             exp = lector.nextInt();
         }while(exp <= 0);
-    
+        /* 
         potencia = 1;
         /*while(exp>0){
             potencia = potencia * base;
@@ -24,10 +38,11 @@ public class EjercicioPotencia {
             potencia = potencia * base;
         }*/
 
+        /* 
         for(; exp > 0; exp--)
             potencia *= base;
-
-        System.out.println("La potencia es: " + potencia);
+        */
+        System.out.println("La potencia es: " + calcularPotencia(base, exp));
     
     }
 }
