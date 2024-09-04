@@ -29,10 +29,15 @@ public class Main {
         estudiante1 = new Estudiante(nombre, r1, carrera, generacion);//inicializa el objeto
 
         System.out.println(estudiante1);
-        /*estudiante1.nombre = nombre;
-        estudiante1.rut = rut;
-        estudiante1.carrera = carrera;
-        estudiante1.generacion = generacion;*/
+        //Cambiar arbitrariamente los datos
+        //estudiante1.nombre = "Juan Perez";
+        //estudiante1.rut = rut;
+        //estudiante1.carrera = "Pedagogia en Artes";
+        //estudiante1.generacion = 1900;
+        //System.out.println(estudiante1);
+        estudiante1.setNombre("Bullanguero");
+        System.out.println("El nombre del estudiante es " + estudiante1.getNombre());
+
         //System.out.println("Estudiante es : " + estudiante1.nombre + " (" + estudiante1.rut + ") de " + estudiante1.carrera + " " + estudiante1.generacion);
         
 
