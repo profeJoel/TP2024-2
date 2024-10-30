@@ -1,0 +1,58 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema Empresa
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema Empresa
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `Empresa` DEFAULT CHARACTER SET utf8 ;
+USE `Empresa` ;
+
+-- -----------------------------------------------------
+-- Table `Empresa`.`departments`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Empresa`.`departments` (
+  `ID` INT NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
+  `manager_ID` INT NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE INDEX `ID_UNIQUE` (`ID` ASC) VISIBLE,
+  INDEX `fk_departments_employees1_idx` (`manager_ID` ASC) VISIBLE,
+  CONSTRAINT `fk_departments_employees1`
+    FOREIGN KEY (`manager_ID`)
+    REFERENCES `Empresa`.`employees` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Empresa`.`employees`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Empresa`.`employees` (
+  `ID` INT NOT NULL,
+  `first_name` VARCHAR(45) NOT NULL,
+  `last_name` VARCHAR(45) NOT NULL,
+  `salary` INT NOT NULL,
+  `hire_date` DATE NOT NULL,
+  `departments_ID` INT NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE INDEX `ID_UNIQUE` (`ID` ASC) VISIBLE,
+  INDEX `fk_employees_departments_idx` (`departments_ID` ASC) VISIBLE,
+  CONSTRAINT `fk_employees_departments`
+    FOREIGN KEY (`departments_ID`)
+    REFERENCES `Empresa`.`departments` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
