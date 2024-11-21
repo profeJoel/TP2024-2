@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Libro</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        form { max-width: 400px; margin: auto; display: flex; flex-direction: column; }
+        label, input { margin-bottom: 10px; }
+        button { padding: 10px 15px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Agregar Libro</h1>
+    <form id="form-libro">
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" required>
+        
+        <label for="isbn">ISBN:</label>
+        <input type="text" id="isbn" required>
+        
+        <label for="autorId">Autor ID:</label>
+        <input type="number" id="autorId" required>
+
+        <button type="submit">Agregar</button>
+    </form>
+
+    <script>
+        document.getElementById('form-libro').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const libro = {
+                titulo: document.getElementById('titulo').value,
+                isbn: document.getElementById('isbn').value,
+                autorId: parseInt(document.getElementById('autorId').value)
+            };
+
+            fetch('/api/libros', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(libro)
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Libro agregado con éxito');
+                    window.location.href = 'list-libros.html';
+                } else {
+                    alert('Error al agregar el libro');
+                }
+            })
+            .catch(err => console.error('Error:', err));
+        });
+    </script>
+</body>
+</html>
